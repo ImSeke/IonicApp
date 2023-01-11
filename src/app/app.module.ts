@@ -22,8 +22,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import {ScrollingModule} from '@angular/cdk/scrolling';
-
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import {LayoutModule} from '@angular/cdk/layout';
 
 
 @NgModule({
@@ -50,6 +50,7 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     MatFormFieldModule,
     MatPaginatorModule,
     ScrollingModule,
+    LayoutModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

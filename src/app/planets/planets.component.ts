@@ -3,6 +3,7 @@ import { PlanetService } from '../services/planet.service';
 import { Planet } from '../models/planet';
 import { Observable, Observer } from 'rxjs';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Haptics, ImpactStyle } from '@capacitor/haptics';
 
 @Component({
   selector: 'app-planets',
@@ -12,6 +13,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class PlanetsComponent {
   public planets: Observable<any> = this.planetService.getPlanets();
   public columndefs: any[] = ['name', 'climate'];
+
 
   constructor(private planetService: PlanetService) { }
 

@@ -1,10 +1,7 @@
-<!-- <ion-app>
-  <ion-router-outlet></ion-router-outlet>
-</ion-app> -->
-
 <mat-toolbar>
   <mat-toolbar-row>
       <span>Star Wars API</span>
+      <ul><button mat-raised-button (click)="vibration()">Vibrate</button></ul>
   </mat-toolbar-row>
   <mat-toolbar-row>
       <span>
@@ -16,4 +13,6 @@
       </span>
   </mat-toolbar-row>
 </mat-toolbar>
+<div class="example-table-container">
 <router-outlet></router-outlet>
+</div>
