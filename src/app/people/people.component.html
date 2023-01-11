@@ -1,0 +1,18 @@
+<div *ngIf="people != null;">
+    <table mat-table [dataSource]="(people | async)?.results">
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <td mat-cell *matCellDef="let person"> {{ person.name }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="hair_color">
+            <th mat-header-cell *matHeaderCellDef>Hair Color</th>
+            <td mat-cell *matCellDef="let person"> {{ person.hair_color }} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columndefs"></tr>
+        <tr mat-row *matRowDef="let row; columns: columndefs;"></tr>
+    </table>
+</div>
+
+    

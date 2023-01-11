@@ -1,16 +1,14 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
+import { PlanetsComponent } from './planets/planets.component'
+import { PeopleComponent } from './people/people.component'
+import { StarshipsComponent } from './starships/starships.component'
+
 const routes: Routes = [
-  {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
-  },
-  {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
-  },
+  { path: 'planets', component: PlanetsComponent },
+  { path: 'people', component: PeopleComponent },
+  { path: 'starships', component: StarshipsComponent }
 ];
 
 @NgModule({

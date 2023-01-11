@@ -1,0 +1,28 @@
+<mat-toolbar>
+    <mat-toolbar-row>
+        <span>Planet Search</span>
+    </mat-toolbar-row>
+</mat-toolbar>
+<div id="search-component">
+    <ul></ul>
+    <mat-form-field appearance="fill">
+        <mat-label>Planet name</mat-label>
+        <input matInput #searchBox id="search-box" (input)="search(searchBox.value)" />
+    </mat-form-field>
+
+    <table mat-table [dataSource]="(planets$ | async)?.results">
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <td mat-cell *matCellDef="let planet"> {{ planet.name }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="climate">
+            <th mat-header-cell *matHeaderCellDef>Climate</th>
+            <td mat-cell *matCellDef="let planet"> {{ planet.climate }} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columndefs"></tr>
+        <tr mat-row *matRowDef="let row; columns: columndefs;"></tr>
+    </table>
+    <ul></ul>
+</div>

@@ -1,3 +1,19 @@
-<ion-app>
+<!-- <ion-app>
   <ion-router-outlet></ion-router-outlet>
-</ion-app>
+</ion-app> -->
+
+<mat-toolbar>
+  <mat-toolbar-row>
+      <span>Star Wars API</span>
+  </mat-toolbar-row>
+  <mat-toolbar-row>
+      <span>
+          <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+              <mat-button-toggle routerLink="/planets">Planets</mat-button-toggle>
+              <mat-button-toggle routerLink="/people">People</mat-button-toggle>
+              <mat-button-toggle routerLink="/starships">Starships</mat-button-toggle>
+          </mat-button-toggle-group>
+      </span>
+  </mat-toolbar-row>
+</mat-toolbar>
+<router-outlet></router-outlet>
