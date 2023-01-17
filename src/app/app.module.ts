@@ -13,6 +13,7 @@ import { PlanetsComponent } from './planets/planets.component';
 import { PeopleComponent } from './people/people.component';
 import { StarshipsComponent } from './starships/starships.component';
 import { PlanetSearchComponent } from './planet-search/planet-search.component';
+import { InputComponent } from './input/input.component';
 
 import {MatTableModule} from '@angular/material/table';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -22,18 +23,17 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import { ScrollingModule } from '@angular/cdk/scrolling';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 import {LayoutModule} from '@angular/cdk/layout';
-
-
+import {MatIconModule} from '@angular/material/icon';
 @NgModule({
   declarations: [
     AppComponent,
     PlanetsComponent,
     PeopleComponent,
     StarshipsComponent,
-    PlanetSearchComponent
-
+    PlanetSearchComponent,
+    InputComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +50,8 @@ import {LayoutModule} from '@angular/cdk/layout';
     MatFormFieldModule,
     MatPaginatorModule,
     ScrollingModule,
-    LayoutModule
+    LayoutModule,
+    MatIconModule,
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

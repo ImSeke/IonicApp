@@ -1,0 +1,12 @@
+<div class="body">
+  <mat-form-field appearance="fill">
+    <mat-label>Input</mat-label>
+    <input matInput #searchBox id="search-box"/>
+    <button *ngIf="searchBox.value" matSuffix mat-icon-button color="primary" aria-label="Clear" (click)="searchBox.value=''">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="submit(searchBox.value)">Submit</button>
+
+  <ul>{{ result }}</ul>
+</div>

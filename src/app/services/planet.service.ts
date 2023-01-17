@@ -9,10 +9,6 @@ import { Planet } from '../models/planet';
 })
 export class PlanetService {
   private planetsUrl = 'https://swapi.dev/api/planets' ;
-  planets: Array<any> = [];
-  count : Number = 0;
-  result: any
-
 
   constructor(
     private http: HttpClient) { }
