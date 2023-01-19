@@ -17,7 +17,7 @@ export class PlanetService {
     return this.http.get<any>(this.planetsUrl)
   }
 
-  getNextPlanets(url:string): Observable<any> {
+  getOnePlanet(url:string): Observable<any> {
     return this.http.get<any>(url) ;
   }
 

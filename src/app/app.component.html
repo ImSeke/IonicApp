@@ -1,15 +1,16 @@
-<mat-toolbar>
-  <mat-toolbar-row>
+<mat-toolbar color="primary">
+  <mat-toolbar-row >
       <span>Star Wars API</span>
-      <ul><button mat-raised-button (click)="vibration()">Vibrate</button></ul>
+      <ul><button mat-raised-button color="accent" (click)="vibration()">Vibrate</button></ul>
   </mat-toolbar-row>
   <mat-toolbar-row>
       <span>
           <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
               <mat-button-toggle routerLink="/planets">Planets</mat-button-toggle>
-              <mat-button-toggle routerLink="/people">People</mat-button-toggle>
-              <mat-button-toggle routerLink="/starships">Starships</mat-button-toggle>
+              <!-- <mat-button-toggle routerLink="/people">People</mat-button-toggle>
+              <mat-button-toggle routerLink="/starships">Starships</mat-button-toggle> -->
               <mat-button-toggle routerLink="/input">Leer Input</mat-button-toggle>
+              <mat-button-toggle routerLink="/camera">Scanner</mat-button-toggle>
           </mat-button-toggle-group>
       </span>
   </mat-toolbar-row>

@@ -14,6 +14,7 @@ import { PeopleComponent } from './people/people.component';
 import { StarshipsComponent } from './starships/starships.component';
 import { PlanetSearchComponent } from './planet-search/planet-search.component';
 import { InputComponent } from './input/input.component';
+import { CameraComponent } from './camera/camera.component';
 
 import {MatTableModule} from '@angular/material/table';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -26,6 +27,12 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import {LayoutModule} from '@angular/cdk/layout';
 import {MatIconModule} from '@angular/material/icon';
+
+import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner/ngx';
+
+import { SQLite } from '@ionic-native/sqlite/ngx';
+import { SQLitePorter } from '@ionic-native/sqlite-porter/ngx';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +40,8 @@ import {MatIconModule} from '@angular/material/icon';
     PeopleComponent,
     StarshipsComponent,
     PlanetSearchComponent,
-    InputComponent
+    InputComponent,
+    CameraComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +61,7 @@ import {MatIconModule} from '@angular/material/icon';
     LayoutModule,
     MatIconModule,
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [BarcodeScanner, SQLite, SQLitePorter, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
