@@ -4,7 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { SQLitePorter } from '@ionic-native/sqlite-porter/ngx';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
-
+import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
+// const { Filesystem } = Plugins;
 
 
 @Injectable({
@@ -78,6 +79,57 @@ export class DbService {
         this.getData();
       });
   }
+
+  exportDatabase() {
+    this.sqlPorter.exportDbToSql(this.storage).then((data) => {
+      // Handle the exported SQL data here
+      this.writeDatabaseFile(data);
+      // this.readDatabaseFile(data);
+      console.log(data);
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
+
+  async writeDatabaseFile(data: any) {
+    const fileName = 'database.txt';
+    const directory = Directory.Documents;
+
+    await Filesystem.writeFile({
+      path: fileName,
+      data: data,
+      directory: directory,
+      encoding: Encoding.UTF8
+    }).then(() => {
+      console.log('File saved!');
+    }).catch((error: any) => {
+      console.log(error);
+    });
+  }
+
+  // async readDatabaseFile(data: any) {
+  //   const fileName = 'database.txt';
+  //   const directory = Directory.Documents;
+
+  //   await Filesystem.readFile({
+  //     path: fileName,
+  //     directory: directory
+  //   }).then((data: { data: BlobPart; }) => {
+  //     // Handle the read file data here
+  //     console.log(data);
+  //     let blob = new Blob([data.data], { type: 'text/plain' });
+  //     var url = window.URL.createObjectURL(blob);
+  //     var a = document.createElement("a");
+  //     document.body.appendChild(a);
+  //     a.href = url;
+  //     a.download = fileName;
+  //     a.click();
+  //     window.URL.revokeObjectURL(url);
+  //     a.remove();
+  //   }).catch((error: any) => {
+  //     console.log(error);
+  //   });
+  // }
 
   // exportAsSql() {
   //   this.sqlPorter.exportDbToSql(this.storage).then((data) => {

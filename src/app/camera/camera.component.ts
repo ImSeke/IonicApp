@@ -39,7 +39,6 @@ export class CameraComponent implements OnInit {
       console.log('Barcode data', barcodeData.text);
     }).catch(err => {
       this.getPlanet('https://swapi.dev/api/planets/2');
-      // this.result = this.planetService.getOnePlanet('https://swapi.dev/api/planets/2');
       alert("Scanning failed: " + err);
       console.log('Error', err);
     });
@@ -56,10 +55,9 @@ export class CameraComponent implements OnInit {
     });
   }
 
-  // exportAlert() {
-    
-  //   this.dbService.exportDatabase();
-  // }
+  exportAlert() {
+    this.dbService.exportDatabase();
+  }
 
   // exportAlert(): void {
   //   let alert: any = this._ALERT.create({
