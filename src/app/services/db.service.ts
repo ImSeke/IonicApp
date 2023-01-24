@@ -5,8 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { SQLitePorter } from '@ionic-native/sqlite-porter/ngx';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
-// const { Filesystem } = Plugins;
-
+import { FileOpener } from '@capacitor-community/file-opener';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +20,7 @@ export class DbService {
     private sqlite: SQLite,
     private httpClient: HttpClient,
     private sqlPorter: SQLitePorter,
+    // private fileOpener: FileOpener,
   ) {
     this.platform.ready().then(() => {
       this.sqlite.create({
@@ -71,7 +71,7 @@ export class DbService {
       this.dataList.next(items);
     });
   }
-  // Add
+
   addData(planet_name: any, registration_date: any) {
     let data = [planet_name, registration_date];
     return this.storage.executeSql('INSERT INTO datatable (planet_name, registration_date) VALUES (?, ?)', data)
@@ -82,9 +82,9 @@ export class DbService {
 
   exportDatabase() {
     this.sqlPorter.exportDbToSql(this.storage).then((data) => {
-      // Handle the exported SQL data here
+
       this.writeDatabaseFile(data);
-      // this.readDatabaseFile(data);
+
       console.log(data);
     }).catch((error) => {
       console.log(error);
@@ -100,111 +100,19 @@ export class DbService {
       data: data,
       directory: directory,
       encoding: Encoding.UTF8
-    }).then(() => {
+    }).then(async () => {
       console.log('File saved!');
+      const uri = await Filesystem.getUri({
+        path: fileName,
+        directory: directory,
+      });
+      FileOpener.open({
+        filePath: uri.uri
+      }).then(() =>
+        console.log('File is opened')
+      );
     }).catch((error: any) => {
       console.log(error);
     });
   }
-
-  // async readDatabaseFile(data: any) {
-  //   const fileName = 'database.txt';
-  //   const directory = Directory.Documents;
-
-  //   await Filesystem.readFile({
-  //     path: fileName,
-  //     directory: directory
-  //   }).then((data: { data: BlobPart; }) => {
-  //     // Handle the read file data here
-  //     console.log(data);
-  //     let blob = new Blob([data.data], { type: 'text/plain' });
-  //     var url = window.URL.createObjectURL(blob);
-  //     var a = document.createElement("a");
-  //     document.body.appendChild(a);
-  //     a.href = url;
-  //     a.download = fileName;
-  //     a.click();
-  //     window.URL.revokeObjectURL(url);
-  //     a.remove();
-  //   }).catch((error: any) => {
-  //     console.log(error);
-  //   });
-  // }
-
-  // exportAsSql() {
-  //   this.sqlPorter.exportDbToSql(this.storage).then((data) => {
-  //     // Handle the exported SQL data here
-  //     const file = new Blob([data], {type: 'text/plain;charset=utf-8'});
-
-  //     DbService.writeAndOpenFile(file, 'database.sql') ;
-  //     console.log(data);
-  //   }).catch((error) => {
-  //     console.log(error);
-  //   });
-  // }
-
-  // exportDatabase() {
-  //   const dbName = 'positronx_db.db';
-  //   const exportDir = this.file.dataDirectory;
-
-  //   this.sqlPorter.exportDbToSql(this.storage)
-  //     .then((sql) => {
-  //       this.file.writeFile(exportDir, dbName, sql, { replace: true })
-  //         .then(() => console.log('Export Successful'))
-  //         .catch(e => console.error(e));
-  //     })
-  //     .catch(e => console.error(e));
-
-
-  //   // this.sqlite.create({
-  //   //     name: dbName,
-  //   //     location: 'default'
-  //   // })
-  //   // .then((db) => {
-
-  //   // })
-
-  // }
-
-  //   static async writeAndOpenFile(data: Blob, fileName: string) {
-  //     var reader = new FileReader();
-  //     reader.readAsDataURL(data);
-  //     reader.onloadend = async function () {
-  //         var base64data = reader.result;
-  //         try {
-  //             const result = await Filesystem.writeFile({
-  //                 path: fileName,
-  //                 data: <string>base64data,
-  //                 directory: Directory.Data,
-  //                 recursive: true
-  //             });
-  //             let fileOpener: FileOpener = new FileOpener();
-  //             fileOpener.open(result.uri, data.type)
-  //                 .then(() => console.log('File is opened'))
-  //                 .catch(e => console.log('Error opening file', e));
-
-  //             console.log('Wrote file', result.uri);
-  //         } catch (e) {
-  //             console.error('Unable to write file', e);
-  //         }
-  //     }
-  // }
-
-  // exportAsSQL() : Promise<any>
-  // {
-  //    return new Promise((resolve, reject) =>
-  //    {
-  //       this.sqlPorter
-  //       .exportDbToSql(this.storage)
-  //       .then((data) =>
-  //       {
-  //          resolve(data);
-  //       })
-  //       .catch((e) =>
-  //       {
-  //          reject(e);
-  //       });
-  //    });
-  // }
-
 }

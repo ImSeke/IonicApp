@@ -5,7 +5,6 @@
 
 
 <div class="results">
-  <!-- <button mat-raised-button color="accent" (click)="showData()">Show Data</button> -->
   <li *ngFor="let data of (dataList | async)">
     <h5>{{data.planet_name}}
       <p>{{data.registration_date | date: 'dd/MM/yyyy HH:mm'}}</p>
