@@ -1,20 +1,33 @@
 <mat-toolbar color="primary">
-  <mat-toolbar-row >
-      <span>Star Wars API</span>
-      <ul><button mat-raised-button color="accent" (click)="vibration()">Vibrate</button></ul>
-  </mat-toolbar-row>
-  <mat-toolbar-row>
-      <span>
-          <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-              <mat-button-toggle routerLink="/planets">Planets</mat-button-toggle>
-              <!-- <mat-button-toggle routerLink="/people">People</mat-button-toggle>
+    <mat-toolbar-row>
+        <span>Star Wars API</span>
+        <ul><button mat-raised-button color="accent" (click)="vibration()">Vibrate</button></ul>
+        <ul>
+            <button class="connection" *ngIf="network.online; else offline">
+                <ion-icon color="success" style="zoom: 2" name="flash"></ion-icon>
+            </button>
+            <ng-template #offline>
+                <button class="no_connection">
+                    <ion-icon style="zoom: 2" name="flash-outline"></ion-icon>
+                </button>
+            </ng-template>         
+        </ul>
+    </mat-toolbar-row>
+    <mat-toolbar-row>
+        <p>Last Connection: {{network.connection_date | date: 'dd/MM/yyyy HH:mm'}}</p>
+    </mat-toolbar-row>
+    <mat-toolbar-row>
+        <span>
+            <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+                <mat-button-toggle routerLink="/planets">Planets</mat-button-toggle>
+                <!-- <mat-button-toggle routerLink="/people">People</mat-button-toggle>
               <mat-button-toggle routerLink="/starships">Starships</mat-button-toggle> -->
-              <mat-button-toggle routerLink="/input">Leer Input</mat-button-toggle>
-              <mat-button-toggle routerLink="/camera">Scanner</mat-button-toggle>
-          </mat-button-toggle-group>
-      </span>
-  </mat-toolbar-row>
+                <mat-button-toggle routerLink="/input">Leer Input</mat-button-toggle>
+                <mat-button-toggle routerLink="/camera">Scanner</mat-button-toggle>
+            </mat-button-toggle-group>
+        </span>
+    </mat-toolbar-row>
 </mat-toolbar>
 <div class="example-container">
-<router-outlet></router-outlet>
+    <router-outlet></router-outlet>
 </div>
