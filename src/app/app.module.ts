@@ -29,6 +29,7 @@ import {LayoutModule} from '@angular/cdk/layout';
 import {MatIconModule} from '@angular/material/icon';
 
 import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner/ngx';
+import { NativeAudio } from '@awesome-cordova-plugins/native-audio/ngx';
 
 import { SQLite } from '@ionic-native/sqlite/ngx';
 import { SQLitePorter } from '@ionic-native/sqlite-porter/ngx';
@@ -61,7 +62,7 @@ import { SQLitePorter } from '@ionic-native/sqlite-porter/ngx';
     LayoutModule,
     MatIconModule,
   ],
-  providers: [BarcodeScanner, SQLite, SQLitePorter, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [NativeAudio, BarcodeScanner, SQLite, SQLitePorter, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

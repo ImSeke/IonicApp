@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { Network } from '@capacitor/network';
-import { observable, Observable, of } from 'rxjs';
+import { ChangeDetectorRef, Injectable } from '@angular/core';
+import { ConnectionStatus, Network } from '@capacitor/network';
+import { from, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,28 +8,32 @@ import { observable, Observable, of } from 'rxjs';
 export class NetworkCheckerService {
   online!: boolean;
   connection_date!: number;
+  status!: Observable<boolean>;
+  constructor() {
+    this.logNetworkState();
+  }
 
-  constructor() { }
-
-  openCheckNetwork() {
+  async openCheckNetwork() {
     Network.addListener('networkStatusChange', (status) => {
       console.log('Network status changed', status.connected);
-      this.online = status.connected;
-      if(this.online == true){
-        this.connection_date = Date.now() ;
-      }
+      this.logNetworkState();
+      of(status.connected).subscribe(connected => {
+        this.online = connected;
+        if (connected == true) {
+          this.connection_date = Date.now();
+        }
+      });
     });
-    
   }
 
   async logNetworkState() {
-    const status = await Network.getStatus();
+  this.status = of(await (await Network.getStatus()).connected);
+    // of(status.connected).subscribe(connected => {
+    //   if (connected == true) {
+    //     this.connection_date = Date.now();
+    //   }
+    //   return connected;
+    // });
 
-    console.log('Network status: ', status.connected);
-    
-    this.online = status.connected;
-    if(this.online == true){
-      this.connection_date = Date.now() ;
-    }
   }
 }

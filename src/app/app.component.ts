@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { Haptics } from '@capacitor/haptics';
-import { Observable, of, switchMap } from 'rxjs';
+import { from, Observable, of, switchMap } from 'rxjs';
 import { NetworkCheckerService } from './services/network-checker.service';
 @Component({
   selector: 'app-root',
@@ -9,13 +9,13 @@ import { NetworkCheckerService } from './services/network-checker.service';
 })
 export class AppComponent {
   title = 'Ionic-Angular-open-api';
+  // netwokrState: Observable<boolean> = from(this.network.logNetworkState());
+  constructor(public _network: NetworkCheckerService, private ref: ChangeDetectorRef) { }
 
-  constructor(public network: NetworkCheckerService) { }
-
-  async ngOnInit() {
-    await this.network.openCheckNetwork();
-    await this.network.logNetworkState();
+  ngOnInit() {
+    this._network.openCheckNetwork();
   }
+
 
   async vibration() {
     await Haptics.vibrate();
